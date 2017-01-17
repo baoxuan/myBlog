@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Immutable-js的基础操作 | Bnative</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="immutable.js 所创建的数据有一个迷人的特性：数据创建后不会被改变。
+1234var map1 = Immutable.Map(&amp;#123;a:1,b:2,c:3&amp;#125;);var map2 = map1.set(&amp;apos;b&amp;apos;,50);map1.get(&amp;apos;b&amp;apos;);// 2map2.get(&amp;apos;b&amp;apos;); // 50
+通过代码，map1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Immutable-js的基础操作">
+<meta property="og:url" content="https://baoxuan.github.io/myBlog/2016/12/16/Immutable基本语法和用法/index.html">
+<meta property="og:site_name" content="Bnative">
+<meta property="og:description" content="immutable.js 所创建的数据有一个迷人的特性：数据创建后不会被改变。
+1234var map1 = Immutable.Map(&amp;#123;a:1,b:2,c:3&amp;#125;);var map2 = map1.set(&amp;apos;b&amp;apos;,50);map1.get(&amp;apos;b&amp;apos;);// 2map2.get(&amp;apos;b&amp;apos;); // 50
+通过代码，map1">
+<meta property="og:updated_time" content="2016-12-16T07:47:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Immutable-js的基础操作">
+<meta name="twitter:description" content="immutable.js 所创建的数据有一个迷人的特性：数据创建后不会被改变。
+1234var map1 = Immutable.Map(&amp;#123;a:1,b:2,c:3&amp;#125;);var map2 = map1.set(&amp;apos;b&amp;apos;,50);map1.get(&amp;apos;b&amp;apos;);// 2map2.get(&amp;apos;b&amp;apos;); // 50
+通过代码，map1">
+  
+    <link rel="alternate" href="/atom.xml" title="Bnative" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/myBlog/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/myBlog/" id="logo">Bnative</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/myBlog/">Home</a>
+        
+          <a class="main-nav-link" href="/myBlog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://baoxuan.github.io/myBlog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Immutable基本语法和用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/myBlog/2016/12/16/Immutable基本语法和用法/" class="article-date">
+  <time datetime="2016-12-16T03:14:34.000Z" itemprop="datePublished">2016-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Immutable-js的基础操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>immutable.js 所创建的数据有一个迷人的特性：数据创建后不会被改变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var map1 = Immutable.Map(&#123;a:1,b:2,c:3&#125;);</div><div class="line">var map2 = map1.set(&apos;b&apos;,50);</div><div class="line">map1.get(&apos;b&apos;);// 2</div><div class="line">map2.get(&apos;b&apos;); // 50</div></pre></td></tr></table></figure>
+<p>通过代码，map1使用set方法更新数据，结果返回新的Map类型数据map2,map2包含更新后的数据，但map1没有变化。</p>
+<p>Immutable.js 相比深拷贝的优势在于区分发生变化的数据和未变化的数据，对于上面的 map1 和 map2， b 是变化的数据，所以 map1 和 map2 各保存一份 b 数据，而 a 和 c 是未变化的数据，所以 map1 和 map2 仍然共享 a 和 c 的数据。</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p><code>Immutable.js</code> 的 API 主要包含以下几部分：</p>
+<ul>
+<li><code>formJS()</code> ，将 JavaScript Object 和 Array 彻底转换为 Immutable Map 和 List</li>
+<li><code>is()</code> ，与 Object.is() 类似都是对值的比较，但它会将 Immutable Iterable 视为值类型数据而不是引用类型数据，如果两个 Immutable Iterable 的值相等，则返回 true。与 Object.is() 不同的是，is(0, -0) 的结果为 true</li>
+<li><code>List</code> ，有序索引集，类似于 JavaScript 中的 Array</li>
+<li><code>Map</code> ，无序 Iterable，读写 Key 的复杂度为 O(log32 N)<br>OrderedMap ，有序 Map，排序依据是数据的 set() 操作</li>
+<li><code>Set</code> ，元素为独一无二的集合，添加数据和判断数据是否存在的复杂度为 O(log32 N)</li>
+<li><code>OrderedSet</code> ，有序 Set，排序依据是数据的 add 操作。</li>
+<li><code>Stack</code> ，有序集合，且使用 unshift(v) 和 shift() 进行添加和删除操作的复杂度为 O(1)</li>
+<li><code>Range()</code> ，返回一个 Seq.Indexed 类型的数据集合，该方法接收三个参数 (start = 1, end = infinity, step = 1) ，分别表示起始点、终止点和步长，如果 start 等于 end，则返回空的数据结合</li>
+<li><code>Repeat()</code> ，返回一个 Seq.indexed 类型的数据结合，该方法接收两个参数 (value，times) ，value 表示重复生成的值，times 表示重复生成的次数，如果没有指定 times ，则表示生成的 Seq 包含无限个 value</li>
+<li><code>Record</code> ，用于衍生新的 Record 类，进而生成 Record 实例。Record 实例类似于 JavaScript 中的 Object 实例，但只接收特定的字符串作为 key，且拥有默认值</li>
+<li><code>Seq</code> ，序列（may not be backed by a concrete data structure）</li>
+<li><code>Iterable</code> ，可以被迭代的 (Key, Value) 键值对集合，是 Immutable.js 中其他所有集合的基类，为其他所有集合提供了 基础的 Iterable 操作函数（比如 map() 和 filter ）</li>
+<li><code>Collection</code> ，创建 Immutable 数据结构的最基础的抽象类，不能直接构造该类型</li>
+</ul>
+<h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><p>List() 是一个构造方法，可以用于创建新的 List 数据类型，上面代码演示了该构造方法接收的参数类型，此外 List 拥有两个静态方法：</p>
+<ul>
+<li><code>List.isList(value)</code>,判断<code>value</code>是否是<code>List</code>类型</li>
+<li><code>List.of(..value)</code>,创建包含<code>...value</code>的列表</li>
+</ul>
+<p>常用的List API</p>
+<h6 id="size"><a href="#size" class="headerlink" title="size"></a>size</h6> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//查看List 长度</div><div class="line">	const $arr = List([1,2,3])</div><div class="line">	$arr.size //3</div></pre></td></tr></table></figure>
+<h5 id="set"><a href="#set" class="headerlink" title="set()"></a>set()</h5><blockquote>
+<p>set(index:number, value:v)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">将index位置的元素替换为value</div><div class="line">const $arr2 =  $arr.set(-1, 0);</div><div class="line">// =&gt; [1,2,0]</div><div class="line">const $arr3 = $arr.set(4, 0);</div><div class="line">//=&gt;[1,2,3,undefined,0]</div></pre></td></tr></table></figure>
+<p>如果index为-1 则替换最后一个</p>
+<h5 id="delete"><a href="#delete" class="headerlink" title="delete()"></a>delete()</h5><blockquote>
+<p>delete(index:number)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const $arr4 = $arr.delete(1);</div><div class="line">// =&gt; [ 1, 3 ]</div></pre></td></tr></table></figure>
+<h5 id="insert"><a href="#insert" class="headerlink" title="insert()"></a>insert()</h5><blockquote>
+<p>insert(index:number,value:t)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const $arr5 = $arr.insert(1, 1.5);</div><div class="line">//=&gt;[1,1.5,2,3]</div></pre></td></tr></table></figure>
+<h5 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const $arr6 = $arr.clear();</div><div class="line">=&gt; []</div></pre></td></tr></table></figure>
+<h5 id="push"><a href="#push" class="headerlink" title="push()"></a>push()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const $arr6 = $arr.push(4);</div><div class="line">=&gt; [1,2,3,4]</div></pre></td></tr></table></figure>
+<h5 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const $arr6 = $arr.pop();</div><div class="line">=&gt; [1,2,3]</div></pre></td></tr></table></figure>
+<h5 id="unshift"><a href="#unshift" class="headerlink" title="unshift()"></a>unshift()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const $arr6 = $arr.unshift(4);</div><div class="line">=&gt; [4,1,2,3]</div></pre></td></tr></table></figure>
+<h5 id="shift"><a href="#shift" class="headerlink" title="shift()"></a>shift()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const $arr6 = $arr.unshift();</div><div class="line">=&gt; [2,3]</div></pre></td></tr></table></figure>
+<h5 id="update"><a href="#update" class="headerlink" title="update()"></a>update()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const $arr2 =  $arr.update(1,(x)=&gt;x*2);</div><div class="line">=&gt;[1,4,3]</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2016/12/16/Immutable基本语法和用法/" data-id="ciy0yojz100000wo0vr7cex01" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/myBlog/2017/01/17/react 引入图片/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          react 引入图片
+        
+      </div>
+    </a>
+  
+  
+    <a href="/myBlog/2016/12/13/webpack 配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webpack</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2016/12/">十二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/myBlog/2017/01/17/react 引入图片/">react 引入图片</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2016/12/16/Immutable基本语法和用法/">Immutable-js的基础操作</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2016/12/13/webpack 配置/">webpack</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2016/12/13/第一篇文章/">我的第一篇文章</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 BX<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/myBlog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/myBlog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/myBlog/fancybox/jquery.fancybox.css">
+  <script src="/myBlog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/myBlog/js/script.js"></script>
+
+  </div>
+</body>
+</html>
