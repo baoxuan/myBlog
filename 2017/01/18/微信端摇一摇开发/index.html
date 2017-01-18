@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>微信端 摇一摇 开发 | Bnative</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="###实现摇一摇功能
+实现摇一摇功能，就需要用到HTML5的DeviceOrientation特性。它提供的DeviceMotion事件封装了设备的运动传感器时间，通过改时间可以获取设备的运动状态、加速度等数据（另还有deviceOrientation事件提供了设备角度、朝向等信息）
+12345678910111213141516171819if(window.DeviceMotionEvent)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信端 摇一摇 开发">
+<meta property="og:url" content="https://baoxuan.github.io/myBlog/2017/01/18/微信端摇一摇开发/index.html">
+<meta property="og:site_name" content="Bnative">
+<meta property="og:description" content="###实现摇一摇功能
+实现摇一摇功能，就需要用到HTML5的DeviceOrientation特性。它提供的DeviceMotion事件封装了设备的运动传感器时间，通过改时间可以获取设备的运动状态、加速度等数据（另还有deviceOrientation事件提供了设备角度、朝向等信息）
+12345678910111213141516171819if(window.DeviceMotionEvent)">
+<meta property="og:updated_time" content="2017-01-18T10:37:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信端 摇一摇 开发">
+<meta name="twitter:description" content="###实现摇一摇功能
+实现摇一摇功能，就需要用到HTML5的DeviceOrientation特性。它提供的DeviceMotion事件封装了设备的运动传感器时间，通过改时间可以获取设备的运动状态、加速度等数据（另还有deviceOrientation事件提供了设备角度、朝向等信息）
+12345678910111213141516171819if(window.DeviceMotionEvent)">
+  
+    <link rel="alternate" href="/atom.xml" title="Bnative" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/myBlog/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/myBlog/" id="logo">Bnative</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/myBlog/">Home</a>
+        
+          <a class="main-nav-link" href="/myBlog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://baoxuan.github.io/myBlog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="摇一摇功能-微信端摇一摇开发" class="article article-type-摇一摇功能" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/myBlog/2017/01/18/微信端摇一摇开发/" class="article-date">
+  <time datetime="2017-01-18T10:18:31.000Z" itemprop="datePublished">2017-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微信端 摇一摇 开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###实现摇一摇功能</p>
+<p>实现摇一摇功能，就需要用到HTML5的DeviceOrientation特性。它提供的DeviceMotion事件封装了设备的运动传感器时间，通过改时间可以获取设备的运动状态、加速度等数据（另还有deviceOrientation事件提供了设备角度、朝向等信息）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">if(window.DeviceMotionEvent) &#123;</div><div class="line">    var speed = 25;    // 用来判定的加速度阈值，太大了则很难触发</div><div class="line">    var x, y, z, lastX, lastY, lastZ;</div><div class="line">    x = y = z = lastX = lastY = lastZ = 0;</div><div class="line">    window.addEventListener(&apos;devicemotion&apos;, function(event)&#123;</div><div class="line">        var acceleration = event.accelerationIncludingGravity;</div><div class="line">        x = acceleration.x;</div><div class="line">        y = acceleration.y;</div><div class="line">        if(Math.abs(x-lastX) &gt; speed || Math.abs(y-lastY) &gt; speed) &#123;</div><div class="line">                if($(&quot;#tip1&quot;).is(&quot;:hidden&quot;) &amp;&amp; $(&quot;#tip2&quot;).is(&quot;:hidden&quot;) &amp;&amp; flat)&#123;</div><div class="line">                    flat = false; // 用个标志避免在异步回调的过程多次请求</div><div class="line">                    queryNum();// 这里异步请求后台中奖信息</div><div class="line">                &#125;</div><div class="line">        lastX = x;</div><div class="line">        lastY = y;</div><div class="line">    	&#125;</div><div class="line">    &#125;, false);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="在摇一摇功能的时候加上动画与声音"><a href="#在摇一摇功能的时候加上动画与声音" class="headerlink" title="在摇一摇功能的时候加上动画与声音"></a>在摇一摇功能的时候加上动画与声音</h3><p>因为 iOS Safari 不允许自动播放 audio，只能通过用户交互触发。我们需要特殊处理</p>
+<p>我们这个功能主要是在微信上使用。我这里利用微信 内置浏览器自带的属性<br>在页面加载的时候，先把audio load()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">wx.config(&#123;</div><div class="line">// 配置信息</div><div class="line">&#125;);</div><div class="line"></div><div class="line"> wx.ready(function()&#123;</div><div class="line">    var audio = document.getElementById(&quot;audio&quot;);</div><div class="line">    audio.src = &quot;http://img.hzyisu.com/audio/shake.mp3&quot;;</div><div class="line">    audio.load();</div><div class="line"> &#125;)</div></pre></td></tr></table></figure>
+<p> 然后在在摇一摇事件触发的时候。play();</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var audio = document.getElementById(&quot;audio&quot;);</div><div class="line">audio.src = &quot;http:****/shake.mp3&quot;;</div><div class="line">audio.play();</div></pre></td></tr></table></figure>
+<p>最后记得ajax 请求成功以后，要把前面的标签位 再重置回来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flat = true;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/01/18/微信端摇一摇开发/" data-id="ciy2sr7df0005kho0bdjzt1q8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/myBlog/2017/01/17/react 引入图片/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">react 引入图片</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2016/12/">十二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/myBlog/2017/01/18/微信端摇一摇开发/">微信端 摇一摇 开发</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2017/01/17/react 引入图片/">react 引入图片</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2016/12/16/Immutable基本语法和用法/">Immutable-js的基础操作</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2016/12/13/webpack 配置/">webpack</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2016/12/13/第一篇文章/">我的第一篇文章</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 BX<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/myBlog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/myBlog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/myBlog/fancybox/jquery.fancybox.css">
+  <script src="/myBlog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/myBlog/js/script.js"></script>
+
+  </div>
+</body>
+</html>
