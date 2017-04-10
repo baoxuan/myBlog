@@ -61,6 +61,148 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-propTypes的相关知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/myBlog/2017/04/10/propTypes的相关知识/" class="article-date">
+  <time datetime="2017-04-10T06:15:53.000Z" itemprop="datePublished">2017-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myBlog/2017/04/10/propTypes的相关知识/">propTypes的相关知识</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="propTypes的相关知识"><a href="#propTypes的相关知识" class="headerlink" title="propTypes的相关知识"></a>propTypes的相关知识</h3><p>———————————————–</p>
+<h4 id="react中的propTypes是用来校验组件中的传入的数据的有效性。"><a href="#react中的propTypes是用来校验组件中的传入的数据的有效性。" class="headerlink" title="react中的propTypes是用来校验组件中的传入的数据的有效性。"></a>react中的propTypes是用来校验组件中的传入的数据的有效性。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">App.propTypes = &#123;</div><div class="line">    statusRequired: React.PropTypes.string.isRequired,</div><div class="line">    number:React.PropTypes.number,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果某个元素不是isRequired,要使用defaultProps属性设置一个默认值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">App.propTypes = &#123;</div><div class="line">    statusRequired: React.PropTypes.string.isRequired,</div><div class="line">    number: React.PropTypes.number</div><div class="line">&#125;</div><div class="line"></div><div class="line">App.defaultProps = &#123;</div><div class="line">    number: 1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="propTypes-类型"><a href="#propTypes-类型" class="headerlink" title="propTypes 类型"></a>propTypes 类型</h4><ul>
+<li>React.propTypes.array   数组</li>
+<li>React.propTypes.bool    布尔值</li>
+<li>React.propTypes.string  字符串</li>
+<li>React.propTypes.object  对象</li>
+<li>React.propTypes.func    函数</li>
+<li>React.propTypes.number  数字</li>
+<li>React.propTypes.element React 元素</li>
+<li>React.propTypes.node 任何类型：numbers, string, elements 或者任何这种类型的数组</li>
+<li>React.propTypes.oneOf([‘bar’, ‘foo’]) 其中的一个字符串</li>
+<li>React.propTypes.oneOfType([React.propTypes.string, React.propTypes.array]) 其中一种的格式类型</li>
+<li>React.propTypes.arrayOf(React.propTypes.string) 某种类型的数组(这里是字符)</li>
+<li>React.propTypes.objectOf(React.propTypes.string)  某种类型的对象(这里是字符)</li>
+<li>React.propTypes.any.isRequired //任何形式且必须</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/04/10/propTypes的相关知识/" data-id="cj1bq83lx0001buo04we6y1ek" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react 服务端渲染" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/myBlog/2017/03/06/react 服务端渲染/" class="article-date">
+  <time datetime="2017-03-06T03:30:35.000Z" itemprop="datePublished">2017-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myBlog/2017/03/06/react 服务端渲染/">react 服务端渲染</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>服务端渲染一个很常见的场景是当用户（或搜索引擎爬虫）第一次请求页面时，用它来做初始渲染。当服务器接收到请求后，它把需要的组件渲染成 HTML 字符串，然后把它返回给客户端（这里统指浏览器）。之后，客户端会接手渲染控制权。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/03/06/react 服务端渲染/" data-id="cj1bq83m50005buo0ozim5lzq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-node相关知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/myBlog/2017/02/06/node相关知识/" class="article-date">
+  <time datetime="2017-02-06T07:03:48.000Z" itemprop="datePublished">2017-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h2><h3 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h3><p>Node Version Manager  node版本管理工具<br>切换不同的不同版本的Node.js</p>
+<h3 id="nrm"><a href="#nrm" class="headerlink" title="nrm"></a>nrm</h3><p>nrm 是一个管理 npm 源的工具。用过 ruby 和 gem 的同学会比较熟悉，通常我们会把 gem 源切到国内的淘宝镜像，这样在安装和更新一些包的时候比较快。nrm 同理，用来切换官方 npm 源和国内的 npm 源（如: cnpm），当然也可以用来切换官方 npm 源和公司私有 npm 源</p>
+<p>全局安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">npm i nrm -g</div></pre></td></tr></table></figure>
+<h3 id="require"><a href="#require" class="headerlink" title="require"></a>require</h3><ol>
+<li><p>require 可加载 .js、.json 和 .node 后缀的文件</p>
+</li>
+<li><p>require 的过程是同步的，所以这样是错误的:</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">module.exports = &#123; a: &apos;hello&apos; &#125;;</div><div class="line">&#125;, 0);</div></pre></td></tr></table></figure>
+<p>require 这个文件得到的是空对象 {}</p>
+<ol>
+<li><p>require 目录的机制是:</p>
+<pre><code>如果目录下有 package.json 并指定了 main 字段，则用之
+如果不存在 package.json，则依次尝试加载目录下的 index.js 和 index.node
+</code></pre></li>
+<li><p>require 过的文件会加载到缓存，所以多次 require 同一个文件（模块）不会重复加载</p>
+</li>
+<li><p>判断是否是程序的入口文件有两种方式:</p>
+</li>
+</ol>
+<p>require.main === module（推荐）</p>
+<p>module.parent === null</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/02/06/node相关知识/" data-id="cj1bq83m00002buo0vfzc68fz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="摇一摇功能-微信端摇一摇开发" class="article article-type-摇一摇功能" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/myBlog/2017/01/18/微信端摇一摇开发/" class="article-date">
@@ -97,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/01/18/微信端摇一摇开发/" data-id="ciy2tg3n50003nko0udykc2a7" class="article-share-link">Share</a>
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/01/18/微信端摇一摇开发/" data-id="cj1bq83m80006buo0846dltli" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/01/17/react 引入图片/" data-id="ciy2tg3mv0001nko05xjrv9ty" class="article-share-link">Share</a>
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/01/17/react 引入图片/" data-id="cj1bq83m20003buo0j4pk8i8w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +360,75 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2016/12/16/Immutable基本语法和用法/" data-id="ciy2tg3mo0000nko0lpycls7y" class="article-share-link">Share</a>
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2016/12/16/Immutable基本语法和用法/" data-id="cj1bq83ls0000buo0yxfyod7w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-第一篇文章" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/myBlog/2016/12/13/第一篇文章/" class="article-date">
+  <time datetime="2016-12-13T05:51:20.000Z" itemprop="datePublished">2016-12-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/myBlog/2016/12/13/第一篇文章/">我的第一篇文章</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一次使用hexo创建自己的博客</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
+<p><a href="https://hexo.io/zh-cn/docs/setup.html" target="_blank" rel="external">更多信息</a></p>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt;</div><div class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>生成静态文件</p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">部署网站</a></p>
+<h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><h4 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装hexo-deployer-git</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: &lt;repository url&gt;</div><div class="line">  branch: [branch]</div><div class="line">  message: [message]</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>repo</td>
+<td style="text-align:center">库的地址</td>
+</tr>
+<tr>
+<td>branch</td>
+<td style="text-align:center">分支名称</td>
+</tr>
+<tr>
+<td>message</td>
+<td style="text-align:center">自定义提交信息</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2016/12/13/第一篇文章/" data-id="cj1bq83m30004buo0lbbou85s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -351,75 +561,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2016/12/13/webpack 配置/" data-id="ciy2tg3n10002nko0eaxepi91" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-第一篇文章" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/myBlog/2016/12/13/第一篇文章/" class="article-date">
-  <time datetime="2016-12-13T05:51:20.000Z" itemprop="datePublished">2016-12-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/myBlog/2016/12/13/第一篇文章/">我的第一篇文章</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>第一次使用hexo创建自己的博客</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
-<p><a href="https://hexo.io/zh-cn/docs/setup.html" target="_blank" rel="external">更多信息</a></p>
-<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt;</div><div class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>生成静态文件</p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">部署网站</a></p>
-<h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><h4 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装hexo-deployer-git</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-<h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: &lt;repository url&gt;</div><div class="line">  branch: [branch]</div><div class="line">  message: [message]</div></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>repo</td>
-<td style="text-align:center">库的地址</td>
-</tr>
-<tr>
-<td>branch</td>
-<td style="text-align:center">分支名称</td>
-</tr>
-<tr>
-<td>message</td>
-<td style="text-align:center">自定义提交信息</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2016/12/13/第一篇文章/" data-id="ciy2tg3na0004nko0s1epu42q" class="article-share-link">Share</a>
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2016/12/13/webpack 配置/" data-id="cj1bq83ma0007buo0bhbd399m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -446,7 +588,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2016/12/">十二月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2016/12/">十二月 2016</a></li></ul>
     </div>
   </div>
 
@@ -459,23 +601,23 @@
       <ul>
         
           <li>
+            <a href="/myBlog/2017/04/10/propTypes的相关知识/">propTypes的相关知识</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2017/03/06/react 服务端渲染/">react 服务端渲染</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2017/02/06/node相关知识/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/myBlog/2017/01/18/微信端摇一摇开发/">微信端 摇一摇 开发</a>
           </li>
         
           <li>
             <a href="/myBlog/2017/01/17/react 引入图片/">react 引入图片</a>
-          </li>
-        
-          <li>
-            <a href="/myBlog/2016/12/16/Immutable基本语法和用法/">Immutable-js的基础操作</a>
-          </li>
-        
-          <li>
-            <a href="/myBlog/2016/12/13/webpack 配置/">webpack</a>
-          </li>
-        
-          <li>
-            <a href="/myBlog/2016/12/13/第一篇文章/">我的第一篇文章</a>
           </li>
         
       </ul>

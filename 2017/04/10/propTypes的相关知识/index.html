@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>propTypes的相关知识 | Bnative</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="propTypes的相关知识———————————————–
+react中的propTypes是用来校验组件中的传入的数据的有效性。1234App.propTypes = &amp;#123;    statusRequired: React.PropTypes.string.isRequired,    number:React.PropTypes.number,&amp;#125;
+如果某个元素不是isReq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="propTypes的相关知识">
+<meta property="og:url" content="https://baoxuan.github.io/myBlog/2017/04/10/propTypes的相关知识/index.html">
+<meta property="og:site_name" content="Bnative">
+<meta property="og:description" content="propTypes的相关知识———————————————–
+react中的propTypes是用来校验组件中的传入的数据的有效性。1234App.propTypes = &amp;#123;    statusRequired: React.PropTypes.string.isRequired,    number:React.PropTypes.number,&amp;#125;
+如果某个元素不是isReq">
+<meta property="og:updated_time" content="2017-04-10T06:17:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="propTypes的相关知识">
+<meta name="twitter:description" content="propTypes的相关知识———————————————–
+react中的propTypes是用来校验组件中的传入的数据的有效性。1234App.propTypes = &amp;#123;    statusRequired: React.PropTypes.string.isRequired,    number:React.PropTypes.number,&amp;#125;
+如果某个元素不是isReq">
+  
+    <link rel="alternate" href="/atom.xml" title="Bnative" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/myBlog/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/myBlog/" id="logo">Bnative</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/myBlog/">Home</a>
+        
+          <a class="main-nav-link" href="/myBlog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://baoxuan.github.io/myBlog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-propTypes的相关知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/myBlog/2017/04/10/propTypes的相关知识/" class="article-date">
+  <time datetime="2017-04-10T06:15:53.000Z" itemprop="datePublished">2017-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      propTypes的相关知识
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="propTypes的相关知识"><a href="#propTypes的相关知识" class="headerlink" title="propTypes的相关知识"></a>propTypes的相关知识</h3><p>———————————————–</p>
+<h4 id="react中的propTypes是用来校验组件中的传入的数据的有效性。"><a href="#react中的propTypes是用来校验组件中的传入的数据的有效性。" class="headerlink" title="react中的propTypes是用来校验组件中的传入的数据的有效性。"></a>react中的propTypes是用来校验组件中的传入的数据的有效性。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">App.propTypes = &#123;</div><div class="line">    statusRequired: React.PropTypes.string.isRequired,</div><div class="line">    number:React.PropTypes.number,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果某个元素不是isRequired,要使用defaultProps属性设置一个默认值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">App.propTypes = &#123;</div><div class="line">    statusRequired: React.PropTypes.string.isRequired,</div><div class="line">    number: React.PropTypes.number</div><div class="line">&#125;</div><div class="line"></div><div class="line">App.defaultProps = &#123;</div><div class="line">    number: 1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="propTypes-类型"><a href="#propTypes-类型" class="headerlink" title="propTypes 类型"></a>propTypes 类型</h4><ul>
+<li>React.propTypes.array   数组</li>
+<li>React.propTypes.bool    布尔值</li>
+<li>React.propTypes.string  字符串</li>
+<li>React.propTypes.object  对象</li>
+<li>React.propTypes.func    函数</li>
+<li>React.propTypes.number  数字</li>
+<li>React.propTypes.element React 元素</li>
+<li>React.propTypes.node 任何类型：numbers, string, elements 或者任何这种类型的数组</li>
+<li>React.propTypes.oneOf([‘bar’, ‘foo’]) 其中的一个字符串</li>
+<li>React.propTypes.oneOfType([React.propTypes.string, React.propTypes.array]) 其中一种的格式类型</li>
+<li>React.propTypes.arrayOf(React.propTypes.string) 某种类型的数组(这里是字符)</li>
+<li>React.propTypes.objectOf(React.propTypes.string)  某种类型的对象(这里是字符)</li>
+<li>React.propTypes.any.isRequired //任何形式且必须</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://baoxuan.github.io/myBlog/myBlog/2017/04/10/propTypes的相关知识/" data-id="cj1bq83lx0001buo04we6y1ek" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/myBlog/2017/03/06/react 服务端渲染/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">react 服务端渲染</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/myBlog/archives/2016/12/">十二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/myBlog/2017/04/10/propTypes的相关知识/">propTypes的相关知识</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2017/03/06/react 服务端渲染/">react 服务端渲染</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2017/02/06/node相关知识/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2017/01/18/微信端摇一摇开发/">微信端 摇一摇 开发</a>
+          </li>
+        
+          <li>
+            <a href="/myBlog/2017/01/17/react 引入图片/">react 引入图片</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 BX<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/myBlog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/myBlog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/myBlog/fancybox/jquery.fancybox.css">
+  <script src="/myBlog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/myBlog/js/script.js"></script>
+
+  </div>
+</body>
+</html>
