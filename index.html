@@ -264,6 +264,141 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://baoxuan.github.io/myBlog/myBlog/2017/05/17/node相关知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BX">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bnative">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/2017/05/17/node相关知识/" itemprop="url">node.js</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-17T16:47:52+08:00">
+                2017-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h3><p>Node Version Manager  node版本管理工具<br>切换不同的不同版本的Node.js</p>
+<h3 id="nrm"><a href="#nrm" class="headerlink" title="nrm"></a>nrm</h3><p>nrm 是一个管理 npm 源的工具。用过 ruby 和 gem 的同学会比较熟悉，通常我们会把 gem 源切到国内的淘宝镜像，这样在安装和更新一些包的时候比较快。nrm 同理，用来切换官方 npm 源和国内的 npm 源（如: cnpm），当然也可以用来切换官方 npm 源和公司私有 npm 源</p>
+<p>全局安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">npm i nrm -g</div></pre></td></tr></table></figure>
+<h3 id="require"><a href="#require" class="headerlink" title="require"></a>require</h3><ol>
+<li><p>require 可加载 .js、.json 和 .node 后缀的文件</p>
+</li>
+<li><p>require 的过程是同步的，所以这样是错误的:</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">module.exports = &#123; a: &apos;hello&apos; &#125;;</div><div class="line">&#125;, 0);</div></pre></td></tr></table></figure>
+<p>require 这个文件得到的是空对象 {}</p>
+<ol>
+<li><p>require 目录的机制是:</p>
+<pre><code>如果目录下有 package.json 并指定了 main 字段，则用之
+如果不存在 package.json，则依次尝试加载目录下的 index.js 和 index.node
+</code></pre></li>
+<li><p>require 过的文件会加载到缓存，所以多次 require 同一个文件（模块）不会重复加载</p>
+</li>
+<li><p>判断是否是程序的入口文件有两种方式:</p>
+</li>
+</ol>
+<p>require.main === module（推荐）</p>
+<p>module.parent === null</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://baoxuan.github.io/myBlog/myBlog/2017/05/17/jQuery 源码解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -354,7 +489,25 @@
       
         
           
-            
+            <h2 id="jQuery-无-new-构造"><a href="#jQuery-无-new-构造" class="headerlink" title="jQuery 无 new 构造"></a>jQuery 无 new 构造</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 无new 构造  不需要每次 new 一个实例</div><div class="line">$(&quot;#tt&quot;).html(&quot;test&quot;);</div></pre></td></tr></table></figure>
+<p>查看jQuery的源代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"> (function(window, undefined) &#123;</div><div class="line">    var</div><div class="line">    // ...</div><div class="line">    jQuery = function(selector, context) &#123;</div><div class="line">        // 看这里，实例化方法 jQuery() 实际上是调用了其拓展的原型方法 jQuery.fn.init</div><div class="line">        return new jQuery.fn.init(selector, context, rootjQuery);</div><div class="line">    &#125;,</div><div class="line"> </div><div class="line">    // jQuery.prototype 即是 jQuery 的原型，挂载在上面的方法，即可让所有生成的 jQuery 对象使用</div><div class="line">    jQuery.fn = jQuery.prototype = &#123;</div><div class="line">        // 实例化化方法，这个方法可以称作 jQuery 对象构造器</div><div class="line">        init: function(selector, context, rootjQuery) &#123;</div><div class="line">            // ...</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    jQuery.fn.init.prototype = jQuery.fn;</div><div class="line"> </div><div class="line">&#125;)(window);</div></pre></td></tr></table></figure>
+<p>1) 其实关系链是这样的： <code>jQuery.fn.init.prototype = jQuery.fn = jQuery.prototype</code><br>2) <code>new jQuery.fn.init() = new jQuery();</code></p>
+<h3 id="根据源码，仿写一个-aQuery"><a href="#根据源码，仿写一个-aQuery" class="headerlink" title="根据源码，仿写一个 aQuery"></a>根据源码，仿写一个 aQuery</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">(function(window)&#123;</div><div class="line">    var aQuery = function()&#123;</div><div class="line">        return new aquery.prototype.init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    aQuery.prototype = &#123;</div><div class="line">        init:function()&#123;</div><div class="line">            return this;</div><div class="line">        &#125;,</div><div class="line">        name:function()&#123;</div><div class="line">            console.log(&apos;name&apos;);</div><div class="line">        &#125;,</div><div class="line">        age:20</div><div class="line">    &#125;</div><div class="line">    aQuery.prototype.init.prototype = aQuery.prototype;</div><div class="line">    window.$ = aQuery;</div><div class="line">&#125;)(window);</div><div class="line"></div><div class="line">$().name() // 输出 name</div><div class="line">$().age // 20</div></pre></td></tr></table></figure>
+<p>当我们直接调用$()时,返回 this,其实就是aQuery()本身。<br>重点是 aQuery.prototype.init.prototype = aQuery.prototype;<br>把aQuery.prototype 赋给 init。所以init也具有了aQuery原型</p>
+<h2 id="jQuery-extend-和-jQuery-fn-extend"><a href="#jQuery-extend-和-jQuery-fn-extend" class="headerlink" title="jQuery.extend 和 jQuery.fn.extend"></a>jQuery.extend 和 jQuery.fn.extend</h2><p>extend 是在jQuery中是很重要的一个方法，用来扩展jQuery的静态方法(比如<code>$.ajax</code>)和实例方法(比如 <code>$(&#39;xx&#39;).attr())</code>。</p>
+<h3 id="extend-API"><a href="#extend-API" class="headerlink" title="extend API"></a>extend API</h3><ul>
+<li><code>jQuery.fn.extend(object)</code><br>把 <code>object</code> 扩展到 <code>jQuery.fn</code>(也就是 <code>jQuery.prototype</code>) 给jQuery对象添加实例方法。<br>通过$(“”).xxx 进行调用</li>
+<li><code>jQuery.extend( target [, object1 ] [, objectN ] )</code> 给jQuery类本身添加静态方法<br>合并多个对象到第一个对象<br>-<code>jQuery.extend( [deep ], target, object1 [, objectN ] )</code><br>deep 为true时 深递归</li>
+</ul>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">jQuert.fn.extend(&#123;</div><div class="line">    check: function()&#123;</div><div class="line">        return this.each(function()&#123;</div><div class="line">            this.checked = true;</div><div class="line">        &#125;)</div><div class="line">    &#125;,</div><div class="line">    uncheck: function()&#123;</div><div class="line">        return this.each(function()&#123;</div><div class="line">            this.check = false;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">// 遍历所有的checkbox 全部设置为选中状态</div><div class="line">$(&quot;input[type=&apos;checkbox&apos;]&quot;).check();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var object1 = &#123;</div><div class="line">    apple: 0,</div><div class="line">    banana: &#123; weight: 52, price: 100&#125;,</div><div class="line">    cherry: 97</div><div class="line">&#125;</div><div class="line">var object2 = &#123;</div><div class="line">    banner:&#123;price： 200&#125;,</div><div class="line">    durian: 100</div><div class="line">&#125;</div><div class="line"></div><div class="line">//$.extend(object1, object2); </div><div class="line">//objec1 &#123;&apos;apple&apos;:0,&apos;banner&apos;:&#123;&apos;price&apos;: 200&#125;,&apos;cheery&apos;:97, durian:100&#125;</div><div class="line"></div><div class="line">//$.extend(true, object1, object2); </div><div class="line">//object1 &#123;&apos;apple&apos;:0,&apos;banner&apos;:&#123;&apos;weight&apos;:52, &apos;price&apos;: 200&#125;,&apos;cheery&apos;:97, durian:100&#125;</div><div class="line"></div><div class="line">var setting = $.extend(&#123;&#125;, object1, object2);</div><div class="line">//setting  &#123;&apos;apple&apos;:0,&apos;banner&apos;:&#123;&apos;price&apos;: 200&#125;,&apos;cheery&apos;:97, durian:100&#125;</div></pre></td></tr></table></figure>
+<p>下面查看源码，可以发现jQuery.extend 和jQuery.fn.extend 是同一个函数实现的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">// 扩展合并函数</div><div class="line">// 合并两个或更多对象的属性到第一个对象中，jQuery 后续的大部分功能都通过该函数扩展</div><div class="line">// 虽然实现方式一样，但是要注意区分用法的不一样，那么为什么两个方法指向同一个函数实现，但是却实现不同的功能呢,</div><div class="line">// 阅读源码就能发现这归功于 this 的强大力量</div><div class="line">// 如果传入两个或多个对象，所有对象的属性会被添加到第一个对象 target</div><div class="line">// 如果只传入一个对象，则将对象的属性添加到 jQuery 对象中，也就是添加静态方法</div><div class="line">// 用这种方式，我们可以为 jQuery 命名空间增加新的方法，可以用于编写 jQuery 插件</div><div class="line">// 如果不想改变传入的对象，可以传入一个空对象：$.extend(&#123;&#125;, object1, object2);</div><div class="line">// 默认合并操作是不迭代的，即便 target 的某个属性是对象或属性，也会被完全覆盖而不是合并</div><div class="line">// 如果第一个参数是 true，则是深拷贝</div><div class="line">// 从 object 原型继承的属性会被拷贝，值为 undefined 的属性不会被拷贝</div><div class="line">// 因为性能原因，JavaScript 自带类型的属性不会合并</div><div class="line">jQuery.extend = jQuery.fn.extend = function() &#123;</div><div class="line">    var src, copyIsArray, copy, name, options, clone,</div><div class="line">        target = arguments[0] || &#123;&#125;,</div><div class="line">        i = 1,</div><div class="line">        length = arguments.length,</div><div class="line">        deep = false;</div><div class="line"> </div><div class="line">    // Handle a deep copy situation</div><div class="line">    // target 是传入的第一个参数</div><div class="line">    // 如果第一个参数是布尔类型，则表示是否要深递归，</div><div class="line">    if (typeof target === &quot;boolean&quot;) &#123;</div><div class="line">        deep = target;</div><div class="line">        target = arguments[1] || &#123;&#125;;</div><div class="line">        // skip the boolean and the target</div><div class="line">        // 如果传了类型为 boolean 的第一个参数，i 则从 2 开始</div><div class="line">        i = 2;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // Handle case when target is a string or something (possible in deep copy)</div><div class="line">    // 如果传入的第一个参数是 字符串或者其他</div><div class="line">    if (typeof target !== &quot;object&quot; &amp;&amp; !jQuery.isFunction(target)) &#123;</div><div class="line">        target = &#123;&#125;;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // extend jQuery itself if only one argument is passed</div><div class="line">    // 如果参数的长度为 1 ，表示是 jQuery 静态方法</div><div class="line">    if (length === i) &#123;</div><div class="line">        target = this;</div><div class="line">        --i;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // 可以传入多个复制源</div><div class="line">    // i 是从 1或2 开始的</div><div class="line">    for (; i &lt; length; i++) &#123;</div><div class="line">        // Only deal with non-null/undefined values</div><div class="line">        // 将每个源的属性全部复制到 target 上</div><div class="line">        if ((options = arguments[i]) != null) &#123;</div><div class="line">            // Extend the base object</div><div class="line">            for (name in options) &#123;</div><div class="line">                // src 是源（即本身）的值</div><div class="line">                // copy 是即将要复制过去的值</div><div class="line">                src = target[name];</div><div class="line">                copy = options[name];</div><div class="line"> </div><div class="line">                // Prevent never-ending loop</div><div class="line">                // 防止有环，例如 extend(true, target, &#123;&apos;target&apos;:target&#125;);</div><div class="line">                if (target === copy) &#123;</div><div class="line">                    continue;</div><div class="line">                &#125;</div><div class="line"> </div><div class="line">                // Recurse if we&apos;re merging plain objects or arrays</div><div class="line">                // 这里是递归调用，最终都会到下面的 else if 分支</div><div class="line">                // jQuery.isPlainObject 用于测试是否为纯粹的对象</div><div class="line">                // 纯粹的对象指的是 通过 &quot;&#123;&#125;&quot; 或者 &quot;new Object&quot; 创建的</div><div class="line">                // 如果是深复制</div><div class="line">                if (deep &amp;&amp; copy &amp;&amp; (jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)))) &#123;</div><div class="line">                    // 数组</div><div class="line">                    if (copyIsArray) &#123;</div><div class="line">                        copyIsArray = false;</div><div class="line">                        clone = src &amp;&amp; jQuery.isArray(src) ? src : [];</div><div class="line"> </div><div class="line">                        // 对象</div><div class="line">                    &#125; else &#123;</div><div class="line">                        clone = src &amp;&amp; jQuery.isPlainObject(src) ? src : &#123;&#125;;</div><div class="line">                    &#125;</div><div class="line"> </div><div class="line">                    // Never move original objects, clone them</div><div class="line">                    // 递归</div><div class="line">                    target[name] = jQuery.extend(deep, clone, copy);</div><div class="line"> </div><div class="line">                    // Don&apos;t bring in undefined values</div><div class="line">                    // 最终都会到这条分支</div><div class="line">                    // 简单的值覆盖</div><div class="line">                &#125; else if (copy !== undefined) &#123;</div><div class="line">                    target[name] = copy;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // Return the modified object</div><div class="line">    // 返回新的 target</div><div class="line">    // 如果 i &lt; length ，是直接返回没经过处理的 target，也就是 arguments[0]</div><div class="line">    // 也就是如果不传需要覆盖的源，调用 $.extend 其实是增加 jQuery 的静态方法</div><div class="line">    return target;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>需要注意的是这一句 jQuery.extend = jQuery.fn.extend = function() {} ，也就是 jQuery.extend 的实现和 jQuery.fn.extend 的实现共用了同一个方法，但是为什么能够实现不同的功能了，这就要归功于 Javascript 强大（怪异？）的 this 了。</p>
+<p>1）在 jQuery.extend() 中，this 的指向是 jQuery 对象(或者说是 jQuery 类)，所以这里扩展在 jQuery 上；</p>
+<p>2）在 jQuery.fn.extend() 中，this 的指向是 fn 对象，前面有提到 jQuery.fn = jQuery.prototype ，也就是这里增加的是原型方法，也就是对象方法。</p>
+
           
         
       
@@ -487,8 +640,7 @@
       
         
           
-            <p>###eslint一些错误提示</p>
-<ul>
+            <h3 id="eslint一些错误提示"><a href="#eslint一些错误提示" class="headerlink" title="eslint一些错误提示"></a>eslint一些错误提示</h3><ul>
 <li>quotes: ‘single’,//必须使用单引号</li>
 <li>prefer-template: ‘error’ // 推荐使用模板代``替以前的字符串拼接</li>
 <li>class-methods-use-this:’error’ //如果一个方法没有用到this,那这个方法可以安全设置为静态方法。既在方法名前加一个static </li>
@@ -497,9 +649,7 @@
 </ul>
 <p><code>callback &amp;&amp; callback();</code> </p>
 <p>改成</p>
-<p><code>if (callback) {
-    callback();
-}</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (callback) &#123;</div><div class="line">    callback();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -633,8 +783,7 @@
       
         
           
-            <h3 id="propTypes的相关知识"><a href="#propTypes的相关知识" class="headerlink" title="propTypes的相关知识"></a>propTypes的相关知识</h3><p>———————————————–</p>
-<h4 id="react中的propTypes是用来校验组件中的传入的数据的有效性。"><a href="#react中的propTypes是用来校验组件中的传入的数据的有效性。" class="headerlink" title="react中的propTypes是用来校验组件中的传入的数据的有效性。"></a>react中的propTypes是用来校验组件中的传入的数据的有效性。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">App.propTypes = &#123;</div><div class="line">    statusRequired: React.PropTypes.string.isRequired,</div><div class="line">    number:React.PropTypes.number,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+            <h3 id="propTypes的相关知识"><a href="#propTypes的相关知识" class="headerlink" title="propTypes的相关知识"></a>propTypes的相关知识</h3><h4 id="react中的propTypes是用来校验组件中的传入的数据的有效性。"><a href="#react中的propTypes是用来校验组件中的传入的数据的有效性。" class="headerlink" title="react中的propTypes是用来校验组件中的传入的数据的有效性。"></a>react中的propTypes是用来校验组件中的传入的数据的有效性。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">App.propTypes = &#123;</div><div class="line">    statusRequired: React.PropTypes.string.isRequired,</div><div class="line">    number:React.PropTypes.number,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果某个元素不是isRequired,要使用defaultProps属性设置一个默认值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">App.propTypes = &#123;</div><div class="line">    statusRequired: React.PropTypes.string.isRequired,</div><div class="line">    number: React.PropTypes.number</div><div class="line">&#125;</div><div class="line"></div><div class="line">App.defaultProps = &#123;</div><div class="line">    number: 1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="propTypes-类型"><a href="#propTypes-类型" class="headerlink" title="propTypes 类型"></a>propTypes 类型</h4><ul>
@@ -922,7 +1071,7 @@
           
             <p>###实现摇一摇功能</p>
 <p>实现摇一摇功能，就需要用到HTML5的DeviceOrientation特性。它提供的DeviceMotion事件封装了设备的运动传感器时间，通过改时间可以获取设备的运动状态、加速度等数据（另还有deviceOrientation事件提供了设备角度、朝向等信息）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">if(window.DeviceMotionEvent) &#123;</div><div class="line">    var speed = 25;    // 用来判定的加速度阈值，太大了则很难触发</div><div class="line">    var x, y, z, lastX, lastY, lastZ;</div><div class="line">    x = y = z = lastX = lastY = lastZ = 0;</div><div class="line">    window.addEventListener(&apos;devicemotion&apos;, function(event)&#123;</div><div class="line">        var acceleration = event.accelerationIncludingGravity;</div><div class="line">        x = acceleration.x;</div><div class="line">        y = acceleration.y;</div><div class="line">        if(Math.abs(x-lastX) &gt; speed || Math.abs(y-lastY) &gt; speed) &#123;</div><div class="line">                if($(&quot;#tip1&quot;).is(&quot;:hidden&quot;) &amp;&amp; $(&quot;#tip2&quot;).is(&quot;:hidden&quot;) &amp;&amp; flat)&#123;</div><div class="line">                    flat = false; // 用个标志避免在异步回调的过程多次请求</div><div class="line">                    queryNum();// 这里异步请求后台中奖信息</div><div class="line">                &#125;</div><div class="line">        lastX = x;</div><div class="line">        lastY = y;</div><div class="line">    	&#125;</div><div class="line">    &#125;, false);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">if (window.DeviceMotionEvent) &#123;</div><div class="line">    var speed = 25;    // 用来判定的加速度阈值，太大了则很难触发</div><div class="line">    var x, y, z, lastX, lastY, lastZ;</div><div class="line">    x = y = z = lastX = lastY = lastZ = 0;</div><div class="line">    window.addEventListener(&apos;devicemotion&apos;, function(event)&#123;</div><div class="line">        var acceleration = event.accelerationIncludingGravity;</div><div class="line">        x = acceleration.x;</div><div class="line">        y = acceleration.y;</div><div class="line">        if(Math.abs(x-lastX) &gt; speed || Math.abs(y-lastY) &gt; speed) &#123;</div><div class="line">                if($(&quot;#tip1&quot;).is(&quot;:hidden&quot;) &amp;&amp; $(&quot;#tip2&quot;).is(&quot;:hidden&quot;) &amp;&amp; flat)&#123;</div><div class="line">                    flat = false; // 用个标志避免在异步回调的过程多次请求</div><div class="line">                    queryNum();// 这里异步请求后台中奖信息</div><div class="line">                &#125;</div><div class="line">        lastX = x;</div><div class="line">        lastY = y;</div><div class="line">    	&#125;</div><div class="line">    &#125;, false);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="在摇一摇功能的时候加上动画与声音"><a href="#在摇一摇功能的时候加上动画与声音" class="headerlink" title="在摇一摇功能的时候加上动画与声音"></a>在摇一摇功能的时候加上动画与声音</h3><p>因为 iOS Safari 不允许自动播放 audio，只能通过用户交互触发。我们需要特殊处理</p>
 <p>我们这个功能主要是在微信上使用。我这里利用微信 内置浏览器自带的属性<br>在页面加载的时候，先把audio load()。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">wx.config(&#123;</div><div class="line">// 配置信息</div><div class="line">&#125;);</div><div class="line"></div><div class="line"> wx.ready(function()&#123;</div><div class="line">    var audio = document.getElementById(&quot;audio&quot;);</div><div class="line">    audio.src = &quot;http:*****/shake.mp3&quot;;</div><div class="line">    audio.load();</div><div class="line"> &#125;)</div></pre></td></tr></table></figure>
@@ -1064,10 +1213,10 @@
         
           
             <p>本地</p>
-<pre><code>`&lt;img src={require(&apos;xxx.jpg&apos;)} /&gt;`
-</code></pre><p>外链</p>
-<pre><code>`&lt;img src={&apos;imgurl&apos;} /&gt;`
-</code></pre>
+<p><code>&lt;img src={require(&#39;xxx.jpg&#39;)} /&gt;</code></p>
+<p>外链</p>
+<p><code>&lt;img src={&#39;imgurl&#39;} /&gt;</code></p>
+
           
         
       
@@ -1719,7 +1868,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/myBlog/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1741,7 +1890,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/myBlog/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

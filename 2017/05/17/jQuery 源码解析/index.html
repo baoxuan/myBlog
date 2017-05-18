@@ -90,16 +90,22 @@
 
 
 
-<meta name="description" content="一段记录，在这个世界留下自己的痕迹">
+<meta name="description" content="jQuery 无 new 构造12// 无new 构造  不需要每次 new 一个实例$(&amp;quot;#tt&amp;quot;).html(&amp;quot;test&amp;quot;);
+查看jQuery的源代码
+123456789101112131415161718 (function(window, undefined) &amp;#123;    var    // ...    jQuery = function">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery 源码解析">
 <meta property="og:url" content="https://baoxuan.github.io/myBlog/2017/05/17/jQuery 源码解析/index.html">
 <meta property="og:site_name" content="Bnative">
-<meta property="og:description" content="一段记录，在这个世界留下自己的痕迹">
-<meta property="og:updated_time" content="2017-05-17T08:39:32.000Z">
+<meta property="og:description" content="jQuery 无 new 构造12// 无new 构造  不需要每次 new 一个实例$(&amp;quot;#tt&amp;quot;).html(&amp;quot;test&amp;quot;);
+查看jQuery的源代码
+123456789101112131415161718 (function(window, undefined) &amp;#123;    var    // ...    jQuery = function">
+<meta property="og:updated_time" content="2017-05-18T03:45:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery 源码解析">
-<meta name="twitter:description" content="一段记录，在这个世界留下自己的痕迹">
+<meta name="twitter:description" content="jQuery 无 new 构造12// 无new 构造  不需要每次 new 一个实例$(&amp;quot;#tt&amp;quot;).html(&amp;quot;test&amp;quot;);
+查看jQuery的源代码
+123456789101112131415161718 (function(window, undefined) &amp;#123;    var    // ...    jQuery = function">
 
 
 
@@ -349,7 +355,25 @@
       
 
       
-        
+        <h2 id="jQuery-无-new-构造"><a href="#jQuery-无-new-构造" class="headerlink" title="jQuery 无 new 构造"></a>jQuery 无 new 构造</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 无new 构造  不需要每次 new 一个实例</div><div class="line">$(&quot;#tt&quot;).html(&quot;test&quot;);</div></pre></td></tr></table></figure>
+<p>查看jQuery的源代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"> (function(window, undefined) &#123;</div><div class="line">    var</div><div class="line">    // ...</div><div class="line">    jQuery = function(selector, context) &#123;</div><div class="line">        // 看这里，实例化方法 jQuery() 实际上是调用了其拓展的原型方法 jQuery.fn.init</div><div class="line">        return new jQuery.fn.init(selector, context, rootjQuery);</div><div class="line">    &#125;,</div><div class="line"> </div><div class="line">    // jQuery.prototype 即是 jQuery 的原型，挂载在上面的方法，即可让所有生成的 jQuery 对象使用</div><div class="line">    jQuery.fn = jQuery.prototype = &#123;</div><div class="line">        // 实例化化方法，这个方法可以称作 jQuery 对象构造器</div><div class="line">        init: function(selector, context, rootjQuery) &#123;</div><div class="line">            // ...</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    jQuery.fn.init.prototype = jQuery.fn;</div><div class="line"> </div><div class="line">&#125;)(window);</div></pre></td></tr></table></figure>
+<p>1) 其实关系链是这样的： <code>jQuery.fn.init.prototype = jQuery.fn = jQuery.prototype</code><br>2) <code>new jQuery.fn.init() = new jQuery();</code></p>
+<h3 id="根据源码，仿写一个-aQuery"><a href="#根据源码，仿写一个-aQuery" class="headerlink" title="根据源码，仿写一个 aQuery"></a>根据源码，仿写一个 aQuery</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">(function(window)&#123;</div><div class="line">    var aQuery = function()&#123;</div><div class="line">        return new aquery.prototype.init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    aQuery.prototype = &#123;</div><div class="line">        init:function()&#123;</div><div class="line">            return this;</div><div class="line">        &#125;,</div><div class="line">        name:function()&#123;</div><div class="line">            console.log(&apos;name&apos;);</div><div class="line">        &#125;,</div><div class="line">        age:20</div><div class="line">    &#125;</div><div class="line">    aQuery.prototype.init.prototype = aQuery.prototype;</div><div class="line">    window.$ = aQuery;</div><div class="line">&#125;)(window);</div><div class="line"></div><div class="line">$().name() // 输出 name</div><div class="line">$().age // 20</div></pre></td></tr></table></figure>
+<p>当我们直接调用$()时,返回 this,其实就是aQuery()本身。<br>重点是 aQuery.prototype.init.prototype = aQuery.prototype;<br>把aQuery.prototype 赋给 init。所以init也具有了aQuery原型</p>
+<h2 id="jQuery-extend-和-jQuery-fn-extend"><a href="#jQuery-extend-和-jQuery-fn-extend" class="headerlink" title="jQuery.extend 和 jQuery.fn.extend"></a>jQuery.extend 和 jQuery.fn.extend</h2><p>extend 是在jQuery中是很重要的一个方法，用来扩展jQuery的静态方法(比如<code>$.ajax</code>)和实例方法(比如 <code>$(&#39;xx&#39;).attr())</code>。</p>
+<h3 id="extend-API"><a href="#extend-API" class="headerlink" title="extend API"></a>extend API</h3><ul>
+<li><code>jQuery.fn.extend(object)</code><br>把 <code>object</code> 扩展到 <code>jQuery.fn</code>(也就是 <code>jQuery.prototype</code>) 给jQuery对象添加实例方法。<br>通过$(“”).xxx 进行调用</li>
+<li><code>jQuery.extend( target [, object1 ] [, objectN ] )</code> 给jQuery类本身添加静态方法<br>合并多个对象到第一个对象<br>-<code>jQuery.extend( [deep ], target, object1 [, objectN ] )</code><br>deep 为true时 深递归</li>
+</ul>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">jQuert.fn.extend(&#123;</div><div class="line">    check: function()&#123;</div><div class="line">        return this.each(function()&#123;</div><div class="line">            this.checked = true;</div><div class="line">        &#125;)</div><div class="line">    &#125;,</div><div class="line">    uncheck: function()&#123;</div><div class="line">        return this.each(function()&#123;</div><div class="line">            this.check = false;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">// 遍历所有的checkbox 全部设置为选中状态</div><div class="line">$(&quot;input[type=&apos;checkbox&apos;]&quot;).check();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var object1 = &#123;</div><div class="line">    apple: 0,</div><div class="line">    banana: &#123; weight: 52, price: 100&#125;,</div><div class="line">    cherry: 97</div><div class="line">&#125;</div><div class="line">var object2 = &#123;</div><div class="line">    banner:&#123;price： 200&#125;,</div><div class="line">    durian: 100</div><div class="line">&#125;</div><div class="line"></div><div class="line">//$.extend(object1, object2); </div><div class="line">//objec1 &#123;&apos;apple&apos;:0,&apos;banner&apos;:&#123;&apos;price&apos;: 200&#125;,&apos;cheery&apos;:97, durian:100&#125;</div><div class="line"></div><div class="line">//$.extend(true, object1, object2); </div><div class="line">//object1 &#123;&apos;apple&apos;:0,&apos;banner&apos;:&#123;&apos;weight&apos;:52, &apos;price&apos;: 200&#125;,&apos;cheery&apos;:97, durian:100&#125;</div><div class="line"></div><div class="line">var setting = $.extend(&#123;&#125;, object1, object2);</div><div class="line">//setting  &#123;&apos;apple&apos;:0,&apos;banner&apos;:&#123;&apos;price&apos;: 200&#125;,&apos;cheery&apos;:97, durian:100&#125;</div></pre></td></tr></table></figure>
+<p>下面查看源码，可以发现jQuery.extend 和jQuery.fn.extend 是同一个函数实现的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">// 扩展合并函数</div><div class="line">// 合并两个或更多对象的属性到第一个对象中，jQuery 后续的大部分功能都通过该函数扩展</div><div class="line">// 虽然实现方式一样，但是要注意区分用法的不一样，那么为什么两个方法指向同一个函数实现，但是却实现不同的功能呢,</div><div class="line">// 阅读源码就能发现这归功于 this 的强大力量</div><div class="line">// 如果传入两个或多个对象，所有对象的属性会被添加到第一个对象 target</div><div class="line">// 如果只传入一个对象，则将对象的属性添加到 jQuery 对象中，也就是添加静态方法</div><div class="line">// 用这种方式，我们可以为 jQuery 命名空间增加新的方法，可以用于编写 jQuery 插件</div><div class="line">// 如果不想改变传入的对象，可以传入一个空对象：$.extend(&#123;&#125;, object1, object2);</div><div class="line">// 默认合并操作是不迭代的，即便 target 的某个属性是对象或属性，也会被完全覆盖而不是合并</div><div class="line">// 如果第一个参数是 true，则是深拷贝</div><div class="line">// 从 object 原型继承的属性会被拷贝，值为 undefined 的属性不会被拷贝</div><div class="line">// 因为性能原因，JavaScript 自带类型的属性不会合并</div><div class="line">jQuery.extend = jQuery.fn.extend = function() &#123;</div><div class="line">    var src, copyIsArray, copy, name, options, clone,</div><div class="line">        target = arguments[0] || &#123;&#125;,</div><div class="line">        i = 1,</div><div class="line">        length = arguments.length,</div><div class="line">        deep = false;</div><div class="line"> </div><div class="line">    // Handle a deep copy situation</div><div class="line">    // target 是传入的第一个参数</div><div class="line">    // 如果第一个参数是布尔类型，则表示是否要深递归，</div><div class="line">    if (typeof target === &quot;boolean&quot;) &#123;</div><div class="line">        deep = target;</div><div class="line">        target = arguments[1] || &#123;&#125;;</div><div class="line">        // skip the boolean and the target</div><div class="line">        // 如果传了类型为 boolean 的第一个参数，i 则从 2 开始</div><div class="line">        i = 2;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // Handle case when target is a string or something (possible in deep copy)</div><div class="line">    // 如果传入的第一个参数是 字符串或者其他</div><div class="line">    if (typeof target !== &quot;object&quot; &amp;&amp; !jQuery.isFunction(target)) &#123;</div><div class="line">        target = &#123;&#125;;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // extend jQuery itself if only one argument is passed</div><div class="line">    // 如果参数的长度为 1 ，表示是 jQuery 静态方法</div><div class="line">    if (length === i) &#123;</div><div class="line">        target = this;</div><div class="line">        --i;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // 可以传入多个复制源</div><div class="line">    // i 是从 1或2 开始的</div><div class="line">    for (; i &lt; length; i++) &#123;</div><div class="line">        // Only deal with non-null/undefined values</div><div class="line">        // 将每个源的属性全部复制到 target 上</div><div class="line">        if ((options = arguments[i]) != null) &#123;</div><div class="line">            // Extend the base object</div><div class="line">            for (name in options) &#123;</div><div class="line">                // src 是源（即本身）的值</div><div class="line">                // copy 是即将要复制过去的值</div><div class="line">                src = target[name];</div><div class="line">                copy = options[name];</div><div class="line"> </div><div class="line">                // Prevent never-ending loop</div><div class="line">                // 防止有环，例如 extend(true, target, &#123;&apos;target&apos;:target&#125;);</div><div class="line">                if (target === copy) &#123;</div><div class="line">                    continue;</div><div class="line">                &#125;</div><div class="line"> </div><div class="line">                // Recurse if we&apos;re merging plain objects or arrays</div><div class="line">                // 这里是递归调用，最终都会到下面的 else if 分支</div><div class="line">                // jQuery.isPlainObject 用于测试是否为纯粹的对象</div><div class="line">                // 纯粹的对象指的是 通过 &quot;&#123;&#125;&quot; 或者 &quot;new Object&quot; 创建的</div><div class="line">                // 如果是深复制</div><div class="line">                if (deep &amp;&amp; copy &amp;&amp; (jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)))) &#123;</div><div class="line">                    // 数组</div><div class="line">                    if (copyIsArray) &#123;</div><div class="line">                        copyIsArray = false;</div><div class="line">                        clone = src &amp;&amp; jQuery.isArray(src) ? src : [];</div><div class="line"> </div><div class="line">                        // 对象</div><div class="line">                    &#125; else &#123;</div><div class="line">                        clone = src &amp;&amp; jQuery.isPlainObject(src) ? src : &#123;&#125;;</div><div class="line">                    &#125;</div><div class="line"> </div><div class="line">                    // Never move original objects, clone them</div><div class="line">                    // 递归</div><div class="line">                    target[name] = jQuery.extend(deep, clone, copy);</div><div class="line"> </div><div class="line">                    // Don&apos;t bring in undefined values</div><div class="line">                    // 最终都会到这条分支</div><div class="line">                    // 简单的值覆盖</div><div class="line">                &#125; else if (copy !== undefined) &#123;</div><div class="line">                    target[name] = copy;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // Return the modified object</div><div class="line">    // 返回新的 target</div><div class="line">    // 如果 i &lt; length ，是直接返回没经过处理的 target，也就是 arguments[0]</div><div class="line">    // 也就是如果不传需要覆盖的源，调用 $.extend 其实是增加 jQuery 的静态方法</div><div class="line">    return target;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>需要注意的是这一句 jQuery.extend = jQuery.fn.extend = function() {} ，也就是 jQuery.extend 的实现和 jQuery.fn.extend 的实现共用了同一个方法，但是为什么能够实现不同的功能了，这就要归功于 Javascript 强大（怪异？）的 this 了。</p>
+<p>1）在 jQuery.extend() 中，this 的指向是 jQuery 对象(或者说是 jQuery 类)，所以这里扩展在 jQuery 上；</p>
+<p>2）在 jQuery.fn.extend() 中，this 的指向是 fn 对象，前面有提到 jQuery.fn = jQuery.prototype ，也就是这里增加的是原型方法，也就是对象方法。</p>
+
       
     </div>
 
@@ -401,6 +425,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/myBlog/2017/05/17/node相关知识/" rel="prev" title="node.js">
+                node.js <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -446,8 +474,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/myBlog/images/avatar.gif"
@@ -462,7 +499,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/myBlog/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -484,7 +521,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/myBlog/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -509,6 +546,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-无-new-构造"><span class="nav-number">1.</span> <span class="nav-text">jQuery 无 new 构造</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据源码，仿写一个-aQuery"><span class="nav-number">1.1.</span> <span class="nav-text">根据源码，仿写一个 aQuery</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-extend-和-jQuery-fn-extend"><span class="nav-number">2.</span> <span class="nav-text">jQuery.extend 和 jQuery.fn.extend</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extend-API"><span class="nav-number">2.1.</span> <span class="nav-text">extend API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">2.1.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
