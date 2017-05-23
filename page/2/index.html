@@ -423,6 +423,236 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://baoxuan.github.io/myBlog/myBlog/2016/12/13/webpack 配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BX">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bnative">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/2016/12/13/webpack 配置/" itemprop="url">webpack配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-13T13:51:20+08:00">
+                2016-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/react/" itemprop="url" rel="index">
+                    <span itemprop="name">react</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Webpack是用于React开发和模块管理的主流工具。</p>
+<p>Webpack将所有静态资源都认为是模块，比如JavaScript，CSS，LESS，TypeScript，JSX，CoffeeScript，图片等等，从而可以对其进行统一管理。为此Webpack引入了加载器的概念，除了纯JavaScript之外，每一种资源都可以通过对应的加载器处理成模块。和大多数包管理器不一样的是，Webpack的加载器之间可以进行串联，一个加载器的输出可以成为另一个加载器的输入。比如LESS文件先通过less-load处理成css，然后再通过css-loader加载成css模块，最后由style-loader加载器对其做最后的处理，从而运行时可以通过style标签将其应用到最终的浏览器环境。</p>
+<h2 id="Webpack入门"><a href="#Webpack入门" class="headerlink" title="Webpack入门"></a>Webpack入门</h2><h3 id="webpack的配置文件webpack-config-js"><a href="#webpack的配置文件webpack-config-js" class="headerlink" title="webpack的配置文件webpack.config.js"></a>webpack的配置文件webpack.config.js</h3><p>一个webpack.config.js文件是这样的，下面是我现在项目中使用的配置  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">var path = require(&apos;path&apos;)</div><div class="line">var webpack = require(&apos;webpack&apos;)</div><div class="line"></div><div class="line"></div><div class="line">module.exports = &#123;</div><div class="line">    // or devtool: &apos;eval&apos; to debug issues with compiled output:</div><div class="line">    devtool: &apos;cheap-module-eval-source-map&apos;,</div><div class="line">    entry: [</div><div class="line">        &apos;webpack-hot-middleware/client&apos;,</div><div class="line">        &apos;./js/index&apos;</div><div class="line">    ],</div><div class="line">    output: &#123;</div><div class="line">        path: path.join(__dirname, &apos;dist&apos;),</div><div class="line">        filename: &apos;bundle.js&apos;,</div><div class="line">        publicPath: &apos;/&apos;,</div><div class="line">    &#125;,</div><div class="line">    plugins: [</div><div class="line">        new webpack.optimize.OccurenceOrderPlugin(),</div><div class="line">        new webpack.HotModuleReplacementPlugin(),</div><div class="line">        new webpack.NoErrorsPlugin()</div><div class="line"></div><div class="line">    ],</div><div class="line">    module: &#123;</div><div class="line">        loaders: [</div><div class="line">            &#123;</div><div class="line">                test: /\.js$/,</div><div class="line">                loaders: [&apos;babel&apos; ],</div><div class="line">                exclude: /node_modules/,</div><div class="line">                include: path.join(__dirname, &apos;/&apos;)// path.join()将多个参数组合成一个 path</div><div class="line">            &#125;,</div><div class="line">            &#123; test: /\.css$/, loader: &apos;style-loader!css-loader!&apos; &#125;,</div><div class="line">            &#123;test: /\.(png|jpg)$/, loader: &apos;url-loader?limit=25000&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h3><p><code>entry</code>可以是一个对象或者是数组，用来定义入口文件<br>另一个参数配置带热更新功能静态服务器，用来实时更新。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">entry: [</div><div class="line">       &apos;webpack-hot-middleware/client&apos;,</div><div class="line">       &apos;./js/index&apos;</div><div class="line">   ]</div></pre></td></tr></table></figure>
+<h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><p><code>output</code>是个对象，用户定义构建后的文件的输出。<br><code>path: path.join(__dirname, &#39;dist&#39;)</code> 输出目录的路径是当前目录下的/dist目录下</p>
+<p><code>filename</code> 输出的文件名</p>
+<p><code>publicPath</code><br>css中img的路径会出现问题，通过设置publicPath 解决，采用绝对路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">output: &#123;</div><div class="line">    path: path.join(__dirname, &apos;dist&apos;),</div><div class="line">    filename: &apos;bundle.js&apos;,</div><div class="line">    publicPath: &apos;/&apos;,</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<h3 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h3><p>这里使用了多个插件</p>
+<ol>
+<li>OccurenceOrderPlugin :为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID</li>
+<li>webpack.HotModuleReplacementPlugin 热更新插件</li>
+<li>UglifyJsPlugin：压缩JS代码；</li>
+<li>ExtractTextPlugin：分离CSS和JS文件</li>
+<li>webpack.DefinePlugin 用来判断环境</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">plugins: [</div><div class="line">  new webpack.optimize.OccurenceOrderPlugin(),</div><div class="line">  new webpack.HotModuleReplacementPlugin(),</div><div class="line">  new webpack.optimize.UglifyJsPlugin(&#123;</div><div class="line">    output:&#123;</div><div class="line">      comments:false,</div><div class="line">    &#125;,</div><div class="line">    compress:&#123;</div><div class="line">      warnings:false</div><div class="line">    &#125;</div><div class="line">  &#125;),</div><div class="line">  new  webpack.DefinePlugin(&#123;</div><div class="line">    &apos;process.env&apos;:&#123;</div><div class="line">      &quot;NODE_ENV&quot;:JSON.stringify(&quot;production&quot;)</div><div class="line">    &#125;</div><div class="line">  &#125;),</div><div class="line">  //抽取样式</div><div class="line">  new ExtractTextPlugin(&quot;bundle.css&quot;)</div><div class="line">],</div></pre></td></tr></table></figure>
+<h3 id="module"><a href="#module" class="headerlink" title="module"></a>module</h3><p>模块加载器 loaders</p>
+<p>loaders定义了一系列的加载器，以及一些正则。当需要加载的文件匹配test的正则时，就会调用后面的loader对文件进行处理，这正是webpack强大的原因。</p>
+<p>比如所有后缀是<code>js</code>都用<code>babel</code>做处理，exclude排除 <code>/node_modules/</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module: &#123;</div><div class="line">  loaders: [</div><div class="line">    &#123;</div><div class="line">      test: /\.js$/,</div><div class="line">      loaders: [ &apos;babel&apos; ],</div><div class="line">      exclude: /node_modules/,</div><div class="line">      include: __dirname</div><div class="line">    &#125;,</div><div class="line">    &#123; test: /\.css$/, loader: ExtractTextPlugin.extract(&apos;style-loader&apos;,&apos;css-loader&apos;) &#125;,</div><div class="line">    &#123;test: /\.(png|jpg)$/, loader: &apos;url-loader?limit=25000&apos; &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>· 图片采用了url-loader加载，如果小于10kb，图片则被转化成 base64 格式的 dataUrl</p>
+<p>· 使用 extract-text-webpack-plugin就可以把css从js中独立抽离出来</p>
+<h3 id="devtool"><a href="#devtool" class="headerlink" title="devtool"></a>devtool</h3><p>开发环境推荐 <code>cheap-module-eval-source-map</code></p>
+<p>生产环境推荐 <code>cheap-module-source-map</code></p>
+<ol>
+<li><p>大部分情况我们调试并不关心列信息，而且就算 sourcemap 没有列，有些浏览器引擎（例如 v8） 也会给出列信息，所以我们使用 cheap 模式可以大幅提高 souremap 生成的效率。</p>
+</li>
+<li><p>使用 module 可支持 babel 这种预编译工具（在 webpack 里做为 loader 使用）。</p>
+</li>
+<li>使用 eval 方式可大幅提高持续构建效率，参考webapck devtool速度对比列表，这对经常需要边改边调的前端开发而言非常重要</li>
+<li>直接将sourceMap放入打包后的文件，会明显增大文件的大小，不利于静态文件的快速加载；而外联.map时，.map文件只会在F12开启时进行下载（sourceMap主要服务于调试），故推荐使用外联.map的形式。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">devtool</th>
+<th style="text-align:left">build speed</th>
+<th style="text-align:left">reuild speed</th>
+<th style="text-align:left">production supported</th>
+<th style="text-align:left">quality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">eval</td>
+<td style="text-align:left">+++</td>
+<td style="text-align:left">+++</td>
+<td style="text-align:left">no</td>
+<td style="text-align:left">generated code</td>
+</tr>
+<tr>
+<td style="text-align:left">cheap-eval-source-map</td>
+<td style="text-align:left">+</td>
+<td style="text-align:left">++</td>
+<td style="text-align:left">no</td>
+<td style="text-align:left">transformed code(lines only)</td>
+</tr>
+<tr>
+<td style="text-align:left">cheap-source-map</td>
+<td style="text-align:left">+</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">transformed code(lines only)</td>
+</tr>
+<tr>
+<td style="text-align:left">cheap-module-eval-source-map</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">++</td>
+<td style="text-align:left">no</td>
+<td style="text-align:left">orginal code(lines only)</td>
+</tr>
+<tr>
+<td style="text-align:left">cheap-module-source-map</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">orginal code(lines only)</td>
+</tr>
+<tr>
+<td style="text-align:left">eval-source-map</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">+</td>
+<td style="text-align:left">no</td>
+<td style="text-align:left">orginal code</td>
+</tr>
+<tr>
+<td style="text-align:left">source-map</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">orginal code</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -472,7 +702,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/myBlog/archives">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
