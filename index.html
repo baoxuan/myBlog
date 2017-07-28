@@ -264,6 +264,299 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://baoxuan.github.io/myBlog/myBlog/2017/07/28/reactDom移除组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BX">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bnative">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/2017/07/28/reactDom移除组件/" itemprop="url">reactDom移除组件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-28T15:03:05+08:00">
+                2017-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="ReactDom"><a href="#ReactDom" class="headerlink" title="ReactDom"></a>ReactDom</h3><p>ReactDom 主要有三个方法：</p>
+<ol>
+<li>render() </li>
+<li>unmountComponetAtNode()</li>
+<li>findDOMNode()</li>
+</ol>
+<h4 id="render-渲染组件"><a href="#render-渲染组件" class="headerlink" title="render() 渲染组件"></a>render() 渲染组件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ReactDom.render(</div><div class="line">    element,</div><div class="line">    container,</div><div class="line">    [callback]</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>渲染到ReactElement到DOM中</p>
+<p><code>element</code>:要渲染的 ReactElement<br><code>container</code>: DOM中要插入的位置<br><code>callback</code>:回调函数，可选，渲染更新完成后调用<br>返回值：React组件</p>
+<h4 id="unmountComponetAtNode-卸载组件"><a href="#unmountComponetAtNode-卸载组件" class="headerlink" title="unmountComponetAtNode() 卸载组件"></a>unmountComponetAtNode() 卸载组件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ReactDOM.unmountComponentAtNode(container)</div></pre></td></tr></table></figure>
+<p>移除一个已经加载到DOM中的React组件，并清除对应的事件处理器和状态。如果container中没有组件，则不会做任何操作。</p>
+<h4 id="findDOMNode-查找组件"><a href="#findDOMNode-查找组件" class="headerlink" title="findDOMNode() 查找组件"></a>findDOMNode() 查找组件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DOMElement findDOMNode(ReactComponent component)</div></pre></td></tr></table></figure>
+<p>当组件已经挂载到DOM中，会返回浏览器中的DOM元素。这个方法从DOM中读取值时很有用，如：读取DOM的尺寸等。大多数情况下，应该使用DOM的<code>ref</code>而非使用<code>findDOMNode</code>方法。当<code>render</code>返回null时<code>findDOMNode</code>也会返回null。</p>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">handleClick()&#123;</div><div class="line">    // unmountComponentAtNode 方法不用用于React生成的dom ,会报错</div><div class="line">    // 可以用 ReactDom.render后再ReactDom.unmountComponentAtNode</div><div class="line">    const result = ReactDom.unmountComponentAtNode(this._div1);</div><div class="line">&#125;</div><div class="line">addClick()&#123;</div><div class="line">    ReactDom.render(</div><div class="line">        &lt;Toast content=&quot;我出来了&quot; parent=&#123;this._div&#125; /&gt;, this._div)  </div><div class="line"></div><div class="line">&#125;</div><div class="line">render()&#123;</div><div class="line">    const &#123; json &#125; = this.props;</div><div class="line">    return(</div><div class="line">        &lt;Layout &gt;</div><div class="line">            &lt;div className=&quot;bg&quot; &gt;</div><div class="line">            &lt;div ref=&#123; div =&gt; this._div = div &#125;&gt;&lt;/div&gt;</div><div class="line">            &lt;div ref=&#123; div1 =&gt; this._div1 = div1 &#125;&gt;&lt;p&gt;移除&lt;/p&gt;&lt;/div&gt;</div><div class="line">            &lt;button onClick=&#123;this.addClick&#125;&gt;点击增加控件&lt;/button&gt;</div><div class="line">            &lt;button onClick=&#123;this.handleClick&#125;&gt;点击删除控件&lt;/button&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;Layout&gt;</div><div class="line">        )</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://baoxuan.github.io/myBlog/myBlog/2017/06/07/mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BX">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bnative">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/2017/06/07/mysql/" itemprop="url">mysql</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-07T17:20:45+08:00">
+                2017-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##mySql教程</p>
+<h3 id="安装教程（mac版）"><a href="#安装教程（mac版）" class="headerlink" title="安装教程（mac版）"></a>安装教程（mac版）</h3><ol>
+<li>下载安装包，点击安装后。记得保存密码，后面需要用到。需要进行额外的配置</li>
+<li>进入系统偏好， 点击mysql,开启mysql 服务</li>
+<li>我们在命令行输入<code>mysql -u root -p</code>, 命令行提示 commond not found,我们需要将mysql加入系统环境变量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(1).进入/usr/local/mysql/bin,查看此目录下是否有mysql，见pic6。</div><div class="line">(2).执行vim ~/.bash_profile</div><div class="line">    在该文件中添加mysql/bin的目录，见pic7：</div><div class="line">    PATH=$PATH:/usr/local/mysql/bin</div><div class="line">添加完成后，按esc，然后输入wq保存。</div><div class="line">最后在命令行输入source ~/.bash_profile</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.现在你就可以通过mysql -uroot -p登录mysql了，会让你输入密码，就是pic3上的&gt;fj…<br>登录成功后，你可以通过下面的命令修改密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SET PASSWORD FOR <span class="string">'root'</span>@<span class="string">'localhost'</span> = PASSWORD(<span class="string">'newpass'</span>);</div></pre></td></tr></table></figure>
+<h3 id="mysql-使用教程"><a href="#mysql-使用教程" class="headerlink" title="mysql 使用教程"></a>mysql 使用教程</h3><ol>
+<li>修改数据库的默认编码模式，全部改为utf-8。mysql的配置文件默认放在/etc/my.cnf。</li>
+<li>登录mysql,输入<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">'%char%'</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以显示该数据库连接使用的字符集的情况。</p>
+<p><img src="images/char.png" alt="图片"></p>
+<ol>
+<li>进入到 <code>usr/local/mysql/support-files</code>目录，里面有个文件：<code>my-default.cnf</code>;</li>
+<li>复制到<code>/etc</code>, 重命名为<code>my.cnf</code>;</li>
+<li>修改<code>vim /etc/my.cnf</code>,<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">default-character-set=utf8</div><div class="line">character-set-server=utf8</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>修改后<br><img src="images/char1.png" alt="图片"></p>
+<h4 id="mysql命令"><a href="#mysql命令" class="headerlink" title="mysql命令"></a>mysql命令</h4><blockquote>
+<p><code>show databases</code> 查看有哪些数据库<br><code>use  dataname</code> 更换数据库<br><code>show tables</code> 返回当前数据库下面的所有表<br><code>Create table tableName(
+columnName(列名1)  type(数据类型)  attri(属性设置),
+columnName(列名2)  type(数据类型)  attri(属性设置),
+……..) engine = engineName</code> 创建数据表<br><code>desc tableName</code>  查看表结构<br><code>insert into tableName values (&#39;value1&#39;)</code>   插入表<br><code>select * from tableName</code> 查询</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create TABLE `mytable`( `name` varchar(255) NOT NULL )ENGINE=MyISAM DEFAULT CHARSET=utf8;</div></pre></td></tr></table></figure>
+<p><code>alter table 表名 add column 列名 varchar(30)</code> 增加列<br><code>alter table 表名 modify 列名 属性</code> 修改属性<br>设置主键先要设置为not null;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alter table 表名 modify 列名 not null;</div><div class="line">alter table 表名 add primary key(id);</div></pre></td></tr></table></figure></p>
+<h4 id="mysql-数据类型"><a href="#mysql-数据类型" class="headerlink" title="mysql 数据类型"></a>mysql 数据类型</h4><p>mysql 数据类型大致分为数值，日期和字符串类型</p>
+<blockquote>
+<p>数值基本类型常用的是 INT,BIGINT,FLOAT,DOUBLE<br>日期常用是DATE(YYYY-MM-DD),TIME(HH:MM:SS),YEAR(YYYY),DATETIME(YYYY-MM-DD HH:MM:SS),TIMESTAMP(YYYYMMDDHHMMSS)<br>字符串类型指CHAR、VARCHAR、BINARY、VARBINARY、BLOB、TEXT、ENUM和SET</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://baoxuan.github.io/myBlog/myBlog/2017/06/01/设计模式-观察者模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -318,8 +611,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/javaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript</span>
+                  <a href="/myBlog/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -1650,286 +1943,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://baoxuan.github.io/myBlog/myBlog/2017/01/18/微信端摇一摇开发/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BX">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bnative">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/2017/01/18/微信端摇一摇开发/" itemprop="url">微信端 摇一摇 开发</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-18T18:18:31+08:00">
-                2017-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/微信/" itemprop="url" rel="index">
-                    <span itemprop="name">微信</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>###实现摇一摇功能</p>
-<p>实现摇一摇功能，就需要用到HTML5的DeviceOrientation特性。它提供的DeviceMotion事件封装了设备的运动传感器时间，通过改时间可以获取设备的运动状态、加速度等数据（另还有deviceOrientation事件提供了设备角度、朝向等信息）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">if (window.DeviceMotionEvent) &#123;</div><div class="line">    var speed = 25;    // 用来判定的加速度阈值，太大了则很难触发</div><div class="line">    var x, y, z, lastX, lastY, lastZ;</div><div class="line">    x = y = z = lastX = lastY = lastZ = 0;</div><div class="line">    window.addEventListener(&apos;devicemotion&apos;, function(event)&#123;</div><div class="line">        var acceleration = event.accelerationIncludingGravity;</div><div class="line">        x = acceleration.x;</div><div class="line">        y = acceleration.y;</div><div class="line">        if(Math.abs(x-lastX) &gt; speed || Math.abs(y-lastY) &gt; speed) &#123;</div><div class="line">                if($(&quot;#tip1&quot;).is(&quot;:hidden&quot;) &amp;&amp; $(&quot;#tip2&quot;).is(&quot;:hidden&quot;) &amp;&amp; flat)&#123;</div><div class="line">                    flat = false; // 用个标志避免在异步回调的过程多次请求</div><div class="line">                    queryNum();// 这里异步请求后台中奖信息</div><div class="line">                &#125;</div><div class="line">        lastX = x;</div><div class="line">        lastY = y;</div><div class="line">    	&#125;</div><div class="line">    &#125;, false);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="在摇一摇功能的时候加上动画与声音"><a href="#在摇一摇功能的时候加上动画与声音" class="headerlink" title="在摇一摇功能的时候加上动画与声音"></a>在摇一摇功能的时候加上动画与声音</h3><p>因为 iOS Safari 不允许自动播放 audio，只能通过用户交互触发。我们需要特殊处理</p>
-<p>我们这个功能主要是在微信上使用。我这里利用微信 内置浏览器自带的属性<br>在页面加载的时候，先把audio load()。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">wx.config(&#123;</div><div class="line">// 配置信息</div><div class="line">&#125;);</div><div class="line"></div><div class="line"> wx.ready(function()&#123;</div><div class="line">    var audio = document.getElementById(&quot;audio&quot;);</div><div class="line">    audio.src = &quot;http:*****/shake.mp3&quot;;</div><div class="line">    audio.load();</div><div class="line"> &#125;)</div></pre></td></tr></table></figure>
-<p> 然后在在摇一摇事件触发的时候。play();</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var audio = document.getElementById(&quot;audio&quot;);</div><div class="line">audio.src = &quot;http:****/shake.mp3&quot;;</div><div class="line">audio.play();</div></pre></td></tr></table></figure>
-<p>最后记得ajax 请求成功以后，要把前面的标签位 再重置回来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flat = true;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://baoxuan.github.io/myBlog/myBlog/2017/01/17/react 引入图片/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="BX">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bnative">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/2017/01/17/react 引入图片/" itemprop="url">react 引入图片</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-17T11:29:03+08:00">
-                2017-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/react/" itemprop="url" rel="index">
-                    <span itemprop="name">react</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本地</p>
-<p><code>&lt;img src={require(&#39;xxx.jpg&#39;)} /&gt;</code></p>
-<p>外链</p>
-<p><code>&lt;img src={&#39;imgurl&#39;} /&gt;</code></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1979,7 +1992,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/myBlog/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1990,7 +2003,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/myBlog/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2001,7 +2014,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/myBlog/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
